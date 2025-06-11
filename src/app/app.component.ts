@@ -1,33 +1,23 @@
-import { Component } from '@angular/core';
-import desseretData from '../../public/data.json';
-import { AddToCartComponent } from "./components/add-to-cart/add-to-cart.component";
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { DessertService, Dessert } from './services/dessert.service';
+import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, AddToCartComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
-});
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent implements OnInit {
+  desserts: Dessert[] = [];
 
-// interface
-interface Dessert {
-  image: DessertImages;
-  name: string;
-  category: string;
-  price: number;
-};
+  constructor(private dessertService: DessertService) {}
 
-interface DessertImages {
-  thumbnail: string;
-  mobile: string;
-  tablet: string;
-  desktop: string;
-};
-
-export class AppComponent {
-  title = 'Product list';
-  desserts:Dessert[] | null = null;
-
-  constructor() {
-    this.desserts = desseretData;
-  };
-};
+  ngOnInit(): void {
+    this.dessertService.getDesserts().subscribe(data => {
+      this.desserts = data;
+    });
+  }
+}
