@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-add-to-cart',
-  standalone: true,
-  imports: [],
+  imports:[],
   templateUrl: './add-to-cart.component.html',
   styleUrl: './add-to-cart.component.scss'
 })
