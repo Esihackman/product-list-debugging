@@ -20,7 +20,7 @@ export interface Dessert {
   providedIn: 'root'
 })
 export class DessertService {
-  private dataUrl = 'data.json';  // adjust if needed based on actual file location
+  private dataUrl = 'data.json';  
 
   constructor(private http: HttpClient) {}
 
