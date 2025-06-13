@@ -1,30 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-export interface DessertImage {
-  thumbnail: string;
-  mobile: string;
-  tablet: string;
-  desktop: string;
-}
-
-export interface Dessert {
-  image: DessertImage;
-  category: string;
-  name: string;
-  price: number;
-}
+import { Observable, BehaviorSubject } from 'rxjs';
+import { Dessert } from '../models/dessert';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DessertService {
-  private dataUrl = 'data.json';  
+  private dataURL = 'data.json';
+  private dessertsSubject: BehaviorSubject<Dessert[]> = new BehaviorSubject<
+    Dessert[]
+  >([]);
+  desserts$ = this.dessertsSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.http.get<Dessert[]>(this.dataURL).subscribe((data) => {
+      this.dessertsSubject.next(data);
+    });
+  }
 
   getDesserts(): Observable<Dessert[]> {
-    return this.http.get<Dessert[]>(this.dataUrl);
+    return this.desserts$;
   }
 }

@@ -1,18 +1,19 @@
-<div class="card-item">
+<div class="cart-item">
   <div class="item-container">
     <div class="item-details">
-      <h3 class="item-name">{{cartItem()?.name}}</h3>
+      <h3 class="item-name">{{ cartItem()?.name }}</h3>
       <div class="item-info">
-        <span class="item-qty">{{cartItem()?.qty }}x</span>
-        <span class="item-price">&#64;{{cartItem()?.price | currency}}</span>
-         <span class="item-amount">
+        <span class="item-qty">{{ cartItem()?.qty }}x</span>
+        <span class="item-price">&#64;{{ cartItem()?.price | currency }}</span>
+        <span class="item-amount">
           {{
             (cartItem()?.qty ?? 0) * (cartItem()?.price ?? 0) | currency : "USD"
           }}</span
         >
       </div>
     </div>
-     <svg
+
+    <svg
       width="20"
       height="20"
       viewBox="0 0 20 20"
@@ -31,6 +32,4 @@
     </svg>
   </div>
   <hr />
-</div>
-  </div>
 </div>

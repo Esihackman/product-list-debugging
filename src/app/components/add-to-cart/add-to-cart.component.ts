@@ -20,7 +20,7 @@ export class AddToCartComponent {
 
   
   decreaseProductItem() {
-    if (this.quantity === 0) {
+    if (this.quantity === 1) {
       this.isAddedToCart = false;
     }
       
